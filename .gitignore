@@ -29,3 +29,7 @@ local.properties
 *.launch
 
 .DS_STORE
+
+src/.DS_Store
+
+.DS_Store
