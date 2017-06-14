@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:esb="http://www.officedepot.com/model/Common/ESBCommon" xmlns:pur="http://www.officedepot.com/model/PurchaseOrder/PurchaseOrder" xmlns:tran="http://www.officedepot.com/model/transaction">
+   <soapenv:Header />
+   <soapenv:Body>
+      <pur:createPurchaseOrderRequest>
+         <tran:transactionHeader>
+            <tran:consumer>
+               <tran:consumerName>$CONSUMERNAME</tran:consumerName>
+               <!--Optional:-->
+               <tran:consumerTransactionID>JDA1234569</tran:consumerTransactionID>
+            </tran:consumer>
+         </tran:transactionHeader>
+         <pur:senderRequestID>
+            <pur:requestID>0098761</pur:requestID>
+            <!--Optional:-->
+            <pur:sequenceID>1</pur:sequenceID>
+         </pur:senderRequestID>
+         <pur:purchaseOrder>
+            <pur:purchaseOrderHeader>
+               <pur:orderDate>2014-10-30</pur:orderDate>
+               <pur:orderType>PO</pur:orderType>
+               <pur:enterprise>
+                  <pur:location>5910</pur:location>
+               </pur:enterprise>
+               <pur:vendor>
+                  <!--You have a CHOICE of the next 2 items at this level-->
+                  <pur:vendorID>0001001898</pur:vendorID>
+               </pur:vendor>
+               <pur:approvalStatus>
+                  <pur:statusCode>0</pur:statusCode>
+               </pur:approvalStatus>
+               <pur:delivery>
+                  <pur:scheduled>
+                     <pur:shipmentDate>2014-11-04</pur:shipmentDate>
+                     <pur:arrivalDate>2014-11-06</pur:arrivalDate>
+                  </pur:scheduled>
+               </pur:delivery>
+               <!--Optional:-->
+               <pur:orderCycle>
+                  <!--Optional:-->
+                  <pur:replenishDays>5</pur:replenishDays>
+                  <!--Optional:-->
+                  <pur:totalLeadTime>15</pur:totalLeadTime>
+               </pur:orderCycle>
+               <!--Optional:-->
+               <pur:orderSummary>
+                  <pur:totalLines>2</pur:totalLines>
+                  <pur:totalQuantities>75</pur:totalQuantities>
+               </pur:orderSummary>
+               <!--Optional:-->
+               <pur:requestAudit>
+                  <!--Optional:-->
+                  <pur:createDate>2014-10-30</pur:createDate>
+                  <!--Optional:-->
+                  <pur:createdBy>JDA</pur:createdBy>
+               </pur:requestAudit>
+            </pur:purchaseOrderHeader>
+            <!--1 to 600 repetitions:-->
+            <pur:purchaseOrderLine>
+               <pur:lineNumber>1</pur:lineNumber>
+               <pur:item>1375192</pur:item>
+               <pur:quantity>25</pur:quantity>
+            </pur:purchaseOrderLine>
+            <pur:purchaseOrderLine>
+               <pur:lineNumber>2</pur:lineNumber>
+               <pur:item>1375183</pur:item>
+               <pur:quantity>50</pur:quantity>
+            </pur:purchaseOrderLine>
+         </pur:purchaseOrder>
+      </pur:createPurchaseOrderRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

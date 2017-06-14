@@ -1,0 +1,3 @@
+consumerName|consumerTransactionID|requestID|orderDate|orderType|vendorID|totalLines|totalQuantities|expectedResult
+123|45|PASS
+456|32|FAIL
