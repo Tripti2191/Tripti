@@ -54,8 +54,24 @@ public class CreatePurchaseOrderTest extends CoreLibraries {
 
 		//Validation part
 		serviceVerificationLibraries.verifyStatusCode(response, 200);
+		String consumerNameFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
+				"createPurchaseOrderResponse.transactionHeader.consumer.consumerName");
+		String consumerTransactionIDFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
+				"createPurchaseOrderResponse.transactionHeader.consumer.consumerTransactionID");
+		String requestIDFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
+				"createPurchaseOrderResponse.purchaseOrderResponse.senderRequestID.requestID");
+		String statusCodeFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
+				"createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusCode");
+		String statusDescriptionFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
+				"createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusDescription");
 
-		response.prettyPrint();
+		serviceVerificationLibraries.verifyStringEquals(consumerNameFromResponse, consumerName);
+		serviceVerificationLibraries.verifyStringEquals(consumerTransactionIDFromResponse, consumerTransactionID);
+		serviceVerificationLibraries.verifyStringEquals(requestIDFromResponse, requestID);
+		serviceVerificationLibraries.verifyStringEquals(statusCodeFromResponse, "SUCCESS");
+		serviceVerificationLibraries.verifyStringEquals(statusDescriptionFromResponse, "SUCCESSFULLY_PUBLISHED_TO_MQ");
+
+		xmlServiceLibrary.prettyPrintResponse(response);
 	}
 
 	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,
