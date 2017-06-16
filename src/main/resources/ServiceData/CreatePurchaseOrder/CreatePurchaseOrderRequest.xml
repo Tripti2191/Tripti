@@ -5,26 +5,26 @@
       <pur:createPurchaseOrderRequest>
          <tran:transactionHeader>
             <tran:consumer>
-               <tran:consumerName>$CONSUMERNAME</tran:consumerName>
+               <tran:consumerName>$CONSUMER_NAME</tran:consumerName>
                <!--Optional:-->
-               <tran:consumerTransactionID>JDA1234569</tran:consumerTransactionID>
+               <tran:consumerTransactionID>$CONSUMER_TRANSACTION_ID</tran:consumerTransactionID>
             </tran:consumer>
          </tran:transactionHeader>
          <pur:senderRequestID>
-            <pur:requestID>0098761</pur:requestID>
+            <pur:requestID>$REQUEST_ID</pur:requestID>
             <!--Optional:-->
             <pur:sequenceID>1</pur:sequenceID>
          </pur:senderRequestID>
          <pur:purchaseOrder>
             <pur:purchaseOrderHeader>
-               <pur:orderDate>2014-10-30</pur:orderDate>
-               <pur:orderType>PO</pur:orderType>
+               <pur:orderDate>$ORDER_DATE</pur:orderDate>
+               <pur:orderType>$ORDER_TYPE</pur:orderType>
                <pur:enterprise>
                   <pur:location>5910</pur:location>
                </pur:enterprise>
                <pur:vendor>
                   <!--You have a CHOICE of the next 2 items at this level-->
-                  <pur:vendorID>0001001898</pur:vendorID>
+                  <pur:vendorID>$VENDOR_ID</pur:vendorID>
                </pur:vendor>
                <pur:approvalStatus>
                   <pur:statusCode>0</pur:statusCode>
@@ -44,8 +44,8 @@
                </pur:orderCycle>
                <!--Optional:-->
                <pur:orderSummary>
-                  <pur:totalLines>2</pur:totalLines>
-                  <pur:totalQuantities>75</pur:totalQuantities>
+                  <pur:totalLines>$TOTAL_LINES</pur:totalLines>
+                  <pur:totalQuantities>$TOTAL_QUANTITIES</pur:totalQuantities>
                </pur:orderSummary>
                <!--Optional:-->
                <pur:requestAudit>
