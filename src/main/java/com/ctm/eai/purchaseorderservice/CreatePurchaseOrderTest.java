@@ -3,14 +3,15 @@ package com.ctm.eai.purchaseorderservice;
 import java.io.IOException;
 
 import org.apache.velocity.VelocityContext;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.ctm.core.CoreLibraries;
+import com.ctm.eai.application.library.BaseTestLibrary;
 import com.ctm.services.annotation.ServiceDataFile;
 import com.ctm.services.dataproviders.ServicesDataProvider;
-import com.ctm.services.xml.CommonServiceVerificationLibraries;
 import com.ctm.services.xml.CtmServicesHandler;
 import com.ctm.services.xml.CtmXmlServiceLibraries;
+import com.ctm.services.xml.CtmXmlServiceVerificationLibraries;
 import com.ctm.services.xml.ServiceAttributesContainer;
 import com.ctm.services.xml.ServicePropertiesContainer;
 
@@ -22,18 +23,21 @@ import io.restassured.response.Response;
  * @author praveen-bhasker
  *
  */
-public class CreatePurchaseOrderTest extends CoreLibraries implements PurchaseOrderService {
+@Listeners({ com.ctm.report.CustomReport.class })
+public class CreatePurchaseOrderTest extends BaseTestLibrary implements PurchaseOrderService {
 
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/CreatePurchaseOrder/CreatePurchaseOrder.txt")
-	public void testCreatePurchaseOrder(String index, String consumerName, String consumerTransactionID,
-			String requestID, String orderDate, String orderType, String vendorID, String totalLines,
-			String totalQuantities, String expectedResult) throws IOException {
+	public void testCreatePurchaseOrder(String index, String sceanrioName, String consumerName,
+			String consumerTransactionID, String requestID, String orderDate, String orderType, String vendorID,
+			String totalLines, String totalQuantities, String expectedResult) throws IOException {
+
+		consoleReport.logTestMessage("Starting test scenario: " + sceanrioName);
 
 		//Instantiation Part 
 		ServicePropertiesContainer propertiesContainer = new ServicePropertiesContainer();
 		CtmServicesHandler xmlServiceHandler = new CtmServicesHandler();
-		CommonServiceVerificationLibraries serviceVerificationLibraries = new CommonServiceVerificationLibraries();
+		CtmXmlServiceVerificationLibraries xmlServiceVerificationLibraries = new CtmXmlServiceVerificationLibraries();
 		CtmXmlServiceLibraries xmlServiceLibrary = new CtmXmlServiceLibraries();
 
 		//Set properties required to post the payload and get response (setting 4 properties are mandatory. setUserName, setPassword, setIsSoap, setBodyOrEnvelope)
@@ -51,27 +55,30 @@ public class CreatePurchaseOrderTest extends CoreLibraries implements PurchaseOr
 		xmlServiceHandler.buildServiceContainer(propertiesContainer);
 		ServiceAttributesContainer container = xmlServiceHandler.getServiceAttributesContainer();
 		Response response = container.getResponse();
+		xmlServiceVerificationLibraries.verifyStatusCode(response, 200);
 
 		//Validation part
 		if (expectedResult.equalsIgnoreCase("PASS")) {
-			serviceVerificationLibraries.verifyStatusCode(response, 200);
-			String consumerNameFromResponse = xmlServiceLibrary.getAttributeValue(response, CONSUMER_NAME);
-			String consumerTransactionIDFromResponse = xmlServiceLibrary.getAttributeValue(response, CONSUMER_TXN_ID);
-			String requestIDFromResponse = xmlServiceLibrary.getAttributeValue(response, REQUEST_ID);
-			String statusCodeFromResponse = xmlServiceLibrary.getAttributeValue(response, STATUS_CODE);
-			String statusDescriptionFromResponse = xmlServiceLibrary.getAttributeValue(response, STATUS_DESCRIPTION);
-
-			serviceVerificationLibraries.verifyStringEquals(consumerNameFromResponse, consumerName);
-			serviceVerificationLibraries.verifyStringEquals(consumerTransactionIDFromResponse, consumerTransactionID);
-			serviceVerificationLibraries.verifyStringEquals(requestIDFromResponse, requestID);
-			serviceVerificationLibraries.verifyStringEquals(statusCodeFromResponse, SUCCESS_STRING);
-			serviceVerificationLibraries.verifyStringEquals(statusDescriptionFromResponse, SUCCESS_MESSAGE);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_NAME,
+					consumerName);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_TXN_ID,
+					consumerTransactionID);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_REQUEST_ID, requestID);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_STATUS_CODE,
+					SUCCESS_STRING);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_STATUS_DESCRIPTION,
+					SUCCESS_MESSAGE);
 		}
 		if (expectedResult.equalsIgnoreCase("FAIL")) {
-
+			if (sceanrioName.equalsIgnoreCase("badDate")) {
+				xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_ERROR_CODE,
+						ERROR_CODE);
+				xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_ERROR_REASON,
+						REASON_CODE);
+				xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response, NODE_ERROR_MESSAGE,
+						"string value '" + orderDate + "' does not match pattern for OrderDateType in namespace ");
+			}
 		}
-
-		xmlServiceLibrary.prettyPrintResponse(response);
 	}
 
 	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,

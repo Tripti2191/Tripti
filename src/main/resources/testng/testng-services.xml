@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Services_Suite" parallel="classes" thread-count="50" data-provider-thread-count="125">
+	<listeners>
+		<listener class-name="com.ctm.listeners.InvocationListenerAdapter" />
+	</listeners>
+	<test name="EAI-Services-Test">
+		<method-selectors>
+			<method-selector>
+				<script language="beanshell">
+                <![CDATA[testName = System.getProperty("testName");
+                method.getDeclaringClass().getName().contains(testName);]]>
+				</script>
+			</method-selector>
+		</method-selectors>
+		<packages>
+			<package name="com.ctm.eai.*" />
+		</packages>
+	</test>
+</suite> <!-- Suite -->

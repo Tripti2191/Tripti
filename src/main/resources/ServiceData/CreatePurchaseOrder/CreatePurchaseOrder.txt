@@ -1,3 +1,4 @@
-consumerName|consumerTransactionID|requestID|orderDate|orderType|vendorID|totalLines|totalQuantities|expectedResult
-JDA|JDA1234569|0098761|2014-10-30|PO|0001001898|2|75|PASS
-JDA|JDA4456766||2017-06-14|PO|0001001850|1|10|PASS
+scenarioName|consumerName|consumerTransactionID|requestID|orderDate|orderType|vendorID|totalLines|totalQuantities|expectedResult
+validScenario|JDA|JDA1234569|0098761|2014-10-30|PO|0001001898|2|75|PASS
+validScenario|JDA|JDA4456766||2017-06-14|PO|0001001850|1|10|PASS
+badDate|WWW|000000|sdfs|2017-06-1|CC|4234234|9999|99999|FAIL
