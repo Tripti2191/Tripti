@@ -22,7 +22,7 @@ import io.restassured.response.Response;
  * @author praveen-bhasker
  *
  */
-public class CreatePurchaseOrderTest extends CoreLibraries {
+public class CreatePurchaseOrderTest extends CoreLibraries implements PurchaseOrderService {
 
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/CreatePurchaseOrder/CreatePurchaseOrder.txt")
@@ -53,23 +53,23 @@ public class CreatePurchaseOrderTest extends CoreLibraries {
 		Response response = container.getResponse();
 
 		//Validation part
-		serviceVerificationLibraries.verifyStatusCode(response, 200);
-		String consumerNameFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
-				"createPurchaseOrderResponse.transactionHeader.consumer.consumerName");
-		String consumerTransactionIDFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
-				"createPurchaseOrderResponse.transactionHeader.consumer.consumerTransactionID");
-		String requestIDFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
-				"createPurchaseOrderResponse.purchaseOrderResponse.senderRequestID.requestID");
-		String statusCodeFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
-				"createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusCode");
-		String statusDescriptionFromResponse = xmlServiceLibrary.getXmlNodeValue(response,
-				"createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusDescription");
+		if (expectedResult.equalsIgnoreCase("PASS")) {
+			serviceVerificationLibraries.verifyStatusCode(response, 200);
+			String consumerNameFromResponse = xmlServiceLibrary.getAttributeValue(response, CONSUMER_NAME);
+			String consumerTransactionIDFromResponse = xmlServiceLibrary.getAttributeValue(response, CONSUMER_TXN_ID);
+			String requestIDFromResponse = xmlServiceLibrary.getAttributeValue(response, REQUEST_ID);
+			String statusCodeFromResponse = xmlServiceLibrary.getAttributeValue(response, STATUS_CODE);
+			String statusDescriptionFromResponse = xmlServiceLibrary.getAttributeValue(response, STATUS_DESCRIPTION);
 
-		serviceVerificationLibraries.verifyStringEquals(consumerNameFromResponse, consumerName);
-		serviceVerificationLibraries.verifyStringEquals(consumerTransactionIDFromResponse, consumerTransactionID);
-		serviceVerificationLibraries.verifyStringEquals(requestIDFromResponse, requestID);
-		serviceVerificationLibraries.verifyStringEquals(statusCodeFromResponse, "SUCCESS");
-		serviceVerificationLibraries.verifyStringEquals(statusDescriptionFromResponse, "SUCCESSFULLY_PUBLISHED_TO_MQ");
+			serviceVerificationLibraries.verifyStringEquals(consumerNameFromResponse, consumerName);
+			serviceVerificationLibraries.verifyStringEquals(consumerTransactionIDFromResponse, consumerTransactionID);
+			serviceVerificationLibraries.verifyStringEquals(requestIDFromResponse, requestID);
+			serviceVerificationLibraries.verifyStringEquals(statusCodeFromResponse, SUCCESS_STRING);
+			serviceVerificationLibraries.verifyStringEquals(statusDescriptionFromResponse, SUCCESS_MESSAGE);
+		}
+		if (expectedResult.equalsIgnoreCase("FAIL")) {
+
+		}
 
 		xmlServiceLibrary.prettyPrintResponse(response);
 	}
