@@ -6,14 +6,13 @@ import org.apache.velocity.VelocityContext;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.ctm.eai.application.library.BaseTestLibrary;
 import com.ctm.services.annotation.ServiceDataFile;
 import com.ctm.services.dataproviders.ServicesDataProvider;
 import com.ctm.services.xml.CtmServicesHandler;
 import com.ctm.services.xml.CtmXmlServiceLibraries;
-import com.ctm.services.xml.CtmXmlServiceVerificationLibraries;
 import com.ctm.services.xml.ServiceAttributesContainer;
 import com.ctm.services.xml.ServicePropertiesContainer;
+import com.ctm.services.xml.XmlServiceVerificationLibraries;
 
 import io.restassured.response.Response;
 
@@ -24,7 +23,7 @@ import io.restassured.response.Response;
  *
  */
 @Listeners({ com.ctm.report.CustomReport.class })
-public class CreatePurchaseOrderTest extends BaseTestLibrary implements PurchaseOrderService {
+public class CreatePurchaseOrderTest extends BasePurchaseOrderTestLibrary implements PurchaseOrderService {
 
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/CreatePurchaseOrder/CreatePurchaseOrder.txt")
@@ -37,7 +36,7 @@ public class CreatePurchaseOrderTest extends BaseTestLibrary implements Purchase
 		//Instantiation Part 
 		ServicePropertiesContainer propertiesContainer = new ServicePropertiesContainer();
 		CtmServicesHandler xmlServiceHandler = new CtmServicesHandler();
-		CtmXmlServiceVerificationLibraries xmlServiceVerificationLibraries = new CtmXmlServiceVerificationLibraries();
+		XmlServiceVerificationLibraries xmlServiceVerificationLibraries = new XmlServiceVerificationLibraries();
 		CtmXmlServiceLibraries xmlServiceLibrary = new CtmXmlServiceLibraries();
 
 		//Set properties required to post the payload and get response (setting 4 properties are mandatory. setUserName, setPassword, setIsSoap, setBodyOrEnvelope)

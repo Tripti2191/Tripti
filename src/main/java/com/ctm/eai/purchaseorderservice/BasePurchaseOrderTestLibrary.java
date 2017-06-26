@@ -1,4 +1,4 @@
-package com.ctm.eai.application.library;
+package com.ctm.eai.purchaseorderservice;
 
 import com.ctm.core.CoreLibraries;
 import com.ctm.logger.ConsoleReport;
@@ -10,7 +10,7 @@ import com.ctm.logger.ConsoleReport;
  *
  */
 
-public class BaseTestLibrary extends CoreLibraries {
+public class BasePurchaseOrderTestLibrary extends CoreLibraries {
 
 	public ConsoleReport consoleReport = new ConsoleReport();
 
