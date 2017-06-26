@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope
+	xmlns:pur="http://www.officedepot.com/model/PurchaseOrder/PurchaseOrder"
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tran="http://www.officedepot.com/model/transaction">
+	<soapenv:Header />
+	<soapenv:Body>
+		<pur:getPurchaseOrderStatusRequest>
+			<tran:transactionHeader>
+				<tran:consumer>
+					<tran:consumerName>$CONSUMER_NAME</tran:consumerName>
+					<tran:consumerTransactionID>$CONSUMER_TRANSACTION_ID</tran:consumerTransactionID>
+				</tran:consumer>
+			</tran:transactionHeader>
+			<pur:senderRequestID>
+				<pur:requestID>1</pur:requestID>
+				<pur:sequenceID>1</pur:sequenceID>
+			</pur:senderRequestID>
+			<pur:requiredLineStatus>$LINE_STATUS</pur:requiredLineStatus>
+		</pur:getPurchaseOrderStatusRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

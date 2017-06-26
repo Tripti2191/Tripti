@@ -1,0 +1,2 @@
+scenarioName|consumerName|consumerTransactionID|lineStatus|expectedResult
+validScenario|JDA|JDA12345|false|PASS

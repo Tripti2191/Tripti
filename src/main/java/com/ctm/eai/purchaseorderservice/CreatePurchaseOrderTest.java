@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 
 import com.ctm.services.annotation.ServiceDataFile;
 import com.ctm.services.dataproviders.ServicesDataProvider;
-import com.ctm.services.xml.CtmServicesHandler;
-import com.ctm.services.xml.CtmXmlServiceLibraries;
+import com.ctm.services.xml.ServicesHandler;
+import com.ctm.services.xml.XmlServiceLibraries;
 import com.ctm.services.xml.ServiceAttributesContainer;
 import com.ctm.services.xml.ServicePropertiesContainer;
 import com.ctm.services.xml.XmlServiceVerificationLibraries;
@@ -35,9 +35,9 @@ public class CreatePurchaseOrderTest extends BasePurchaseOrderTestLibrary implem
 
 		//Instantiation Part 
 		ServicePropertiesContainer propertiesContainer = new ServicePropertiesContainer();
-		CtmServicesHandler xmlServiceHandler = new CtmServicesHandler();
+		ServicesHandler xmlServiceHandler = new ServicesHandler();
 		XmlServiceVerificationLibraries xmlServiceVerificationLibraries = new XmlServiceVerificationLibraries();
-		CtmXmlServiceLibraries xmlServiceLibrary = new CtmXmlServiceLibraries();
+		XmlServiceLibraries xmlServiceLibrary = new XmlServiceLibraries();
 
 		//Set properties required to post the payload and get response (setting 4 properties are mandatory. setUserName, setPassword, setIsSoap, setBodyOrEnvelope)
 		propertiesContainer.setUserName(getData("testData.serviceUserName"));
