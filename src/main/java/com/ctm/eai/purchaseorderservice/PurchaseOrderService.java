@@ -7,6 +7,9 @@ public interface PurchaseOrderService {
 	public static final String NODE_REQUEST_ID = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.senderRequestID.requestID";
 	public static final String NODE_STATUS_CODE = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusCode";
 	public static final String NODE_STATUS_DESCRIPTION = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusDescription";
+	public static final String NODE_LINE_STATUS= "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusDescription";
+	
+	
 	public static final String NODE_ERROR_CODE = "Envelope.Body.Fault.detail.fault.errorCode";
 	public static final String NODE_ERROR_REASON = "Envelope.Body.Fault.detail.fault.reason";
 	public static final String NODE_ERROR_MESSAGE = "Envelope.Body.Fault.detail.fault.details.ValidationFailureDetail.message";
