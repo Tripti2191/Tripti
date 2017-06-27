@@ -40,7 +40,7 @@
 							-Xms1024m -Xmx1024m
 						</argLine>
 						<suiteXmlFiles>
-							<suiteXmlFile>resources/testng/${testngFile}</suiteXmlFile>
+							<suiteXmlFile>src/main/resources/testng/${testngFile}</suiteXmlFile>
 						</suiteXmlFiles>
 						<packageName>${packageName}</packageName>
 						<browserName>${browserName}</browserName>
