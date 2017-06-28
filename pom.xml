@@ -37,9 +37,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.19</version>
 					<configuration>
-						<argLine>-DpackageName=${packageName} -DenableGrid=${enableGrid}
-							-Xms1024m -Xmx1024m
-						</argLine>
+						<argLine>-DpackageName=${packageName} -DenableGrid=${enableGrid} -DtestUrl=${testUrl}</argLine>
 						<suiteXmlFiles>
 							<suiteXmlFile>src/main/resources/testng/${testngFile}</suiteXmlFile>
 						</suiteXmlFiles>
