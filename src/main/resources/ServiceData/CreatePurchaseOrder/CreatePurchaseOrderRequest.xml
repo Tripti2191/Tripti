@@ -31,8 +31,8 @@
                </pur:approvalStatus>
                <pur:delivery>
                   <pur:scheduled>
-                     <pur:shipmentDate>$SHIPMENT_DATE</pur:shipmentDate>
-                     <pur:arrivalDate>$ARRIVAL_DATE</pur:arrivalDate>
+                     <pur:shipmentDate>2014-11-04</pur:shipmentDate>
+                     <pur:arrivalDate>2014-11-06</pur:arrivalDate>
                   </pur:scheduled>
                </pur:delivery>
                <!--Optional:-->
