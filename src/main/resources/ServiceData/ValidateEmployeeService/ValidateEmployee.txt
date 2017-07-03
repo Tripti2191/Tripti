@@ -1,0 +1,2 @@
+scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOperation|sensitiveData|result|firstName|lastName|expectedResult
+validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|PASS

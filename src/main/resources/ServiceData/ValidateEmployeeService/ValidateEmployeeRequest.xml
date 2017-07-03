@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://xmlns.officedepot.com/ApplicationMessage/HR/Custom/ABM/ValidateEmployeeRequestABM/V1" xmlns:tran="http://www.officedepot.com/model/transaction" xmlns:v11="http://xmlns.officedepot.com/ApplicationMessage/HR/Custom/ABM/ValidateEmployeeRequestABO/V1">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:ValidateEmployeeRequestABM>
+         <tran:transactionHeader>
+            <tran:consumer>
+               <tran:consumerName>POS</tran:consumerName>
+               <!--Optional:-->
+               <tran:consumerTransactionID>98765</tran:consumerTransactionID>
+            </tran:consumer>
+         </tran:transactionHeader>
+         <v1:ValidateEmployeeRequest>
+            <v11:ODEmployeeID>${#Project#ValidEmpID}</v11:ODEmployeeID>
+            <!--Optional:-->
+         </v1:ValidateEmployeeRequest>
+      </v1:ValidateEmployeeRequestABM>
+   </soapenv:Body>
+</soapenv:Envelope>
