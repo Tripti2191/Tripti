@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.ctm.services.annotation.ServiceDataFile;
 import com.ctm.services.dataproviders.ServicesDataProvider;
 import com.ctm.services.xml.ServicesHandler;
+import com.ctm.services.CtmServiceLibraries;
 import com.ctm.services.xml.XmlServiceLibraries;
 import com.ctm.services.xml.ServiceAttributesContainer;
 import com.ctm.services.xml.ServicePropertiesContainer;
@@ -58,15 +59,14 @@ public class GetPurchaseOrderStatusTest extends BasePurchaseOrderTestLibrary imp
 				//Validation part
 				if (expectedResult.equalsIgnoreCase("PASS")) {
 					
-					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_NAME,
+					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_GET_CONSUMER_NAME,
 							consumerName);
-					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_TXN_ID,
+					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_GET_CONSUMER_TXN_ID ,
 							consumerTransactionID);
-					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_STATUS_CODE,
-							SUCCESS_STRING);
-					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_STATUS_DESCRIPTION,
+					
+					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_GET_STATUS_DESCRIPTION,
 						SUCCESS_MESSAGE);
-					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,NODE_LINE_STATUS,lineStatus);
+					xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,NODE_GET_LINE_STATUS,lineStatus);
 					
 						}
 				if (expectedResult.equalsIgnoreCase("FAIL")) {

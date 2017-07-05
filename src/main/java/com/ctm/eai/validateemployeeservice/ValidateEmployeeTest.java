@@ -27,7 +27,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 	
 	
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
-	@ServiceDataFile("ServiceData/CreatePurchaseOrder/validateEmployee.txt")
+	@ServiceDataFile("ServiceData/ValidateEmploeeService/validateEmployee.txt")
 	public void testValidateEmployeeRequestABM(String index,String sceanrioName,String consumerName, String consumerTransactionID,String employeeID,String serviceName, String serviceOperation,String sensitiveData, String result,String firstName,String lastName, String expectedResult) throws IOException {
 
 
@@ -44,7 +44,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		propertiesContainer.setPassword(getData("testData.servicePassword"));
 		propertiesContainer.setIsSoap(true);
 		String body = xmlServiceLibrary
-				.getRequestBodyFromFile("ServiceData/CreatePurchaseOrder/ValidateEmployeeRequest.xml");
+				.getRequestBodyFromFile("ServiceData/ValidateEmployeeService/ValidateEmployeeRequest.xml");
 		System.out.println("before templAte replaced body");
 		String templateReplacedBody = xmlServiceLibrary.replaceTemplateWithValues(body,
 				createContextForReplacement(consumerName, employeeID,consumerTransactionID ));
@@ -55,10 +55,10 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		xmlServiceHandler.buildServiceContainer(propertiesContainer);
 		ServiceAttributesContainer container = xmlServiceHandler.getServiceAttributesContainer();
 		Response response = container.getResponse();
+		
 		xmlServiceVerificationLibraries.verifyStatusCode(response, 200);
-		CtmServiceLibraries ctmServiceLibraries = new CtmServiceLibraries();
-		ctmServiceLibraries.getCountOfAllAttributes("sindhu");
-
+		
+		
 		//Validation part
 		if (expectedResult.equalsIgnoreCase("PASS")) {
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_NAME,
@@ -98,4 +98,12 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		
 		return context;
 	}
+	
+	public CtmServiceLibraries getCtmServiceLibraries(){
+
+		CtmServiceLibraries ctmServiceLibraries = new CtmServiceLibraries();
+		ctmServiceLibraries.getCountOfAllAttributes("sindhu");
+		return ctmServiceLibraries;
+	}
 }
+	
