@@ -2,7 +2,7 @@ package com.ctm.eai.validateemployeeservice;
 
 
 
-public interface ValidateEmployeeService {
+public interface ValidateEmployeeService {  
 
 	public static final String NODE_CONSUMER_NAME = "Envelope.Body.ValidateEmployeeResponseABM.transactionHeader.consumer.consumerName";
 	public static final String NODE_CONSUMER_TXN_ID = "Envelope.Body.ValidateEmployeeResponseABM.transactionHeader.consumer.consumerTransactionID";
@@ -22,21 +22,19 @@ public interface ValidateEmployeeService {
 	public static final String NODE_LAST_NAME= "Envelope.Body.ValidateEmployeeResponseABM.ValidateEmployeeResponse.LastName";
 	
 	
+	public static final String NODE_FAULT_STRING = "Envelope.Body.Fault.detail.fault.faultstring";
+	public static final String NODE_ERROR_CODE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorCode";
+	public static final String NODE_ERROR_MESSAGE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorMessage";
 	
 	
 	
-	
-	
-	public static final String NODE_ERROR_CODE = "Envelope.Body.Fault.detail.fault.errorCode";
-	public static final String NODE_ERROR_REASON = "Envelope.Body.Fault.detail.fault.reason";
-	public static final String NODE_ERROR_MESSAGE = "Envelope.Body.Fault.detail.fault.details.ValidationFailureDetail.message";
 	
 
     
 	public static final String SUCCESS_STRING = "SUCCESS";
 	public static final String SUCCESS_MESSAGE = "SUCCESSFULLY_PUBLISHED_TO_MQ";
-	public static final String REASON_CODE = "OSB Validate action failed validation";
-	public static final String ERROR_CODE = "BEA-382505";
+	public static final String REASON_CODE = "Employee ID not found at PeopleSoft  for Employee ID";
+	public static final String ERROR_CODE = "100";
 }
 
 

@@ -48,6 +48,9 @@ public class CreatePurchaseOrderTest extends BasePurchaseOrderTestLibrary implem
 		String templateReplacedBody = xmlServiceLibrary.replaceTemplateWithValues(body,
 				createContextForReplacement(consumerName, consumerTransactionID, requestID, orderDate, orderType,
 						vendorID, totalLines, totalQuantities));
+System.out.println("after templAte replaced body");
+		
+		System.out.println("req body..." +body);
 		propertiesContainer.setBodyOrEnvelope(templateReplacedBody);
 
 		//Build service container and get response

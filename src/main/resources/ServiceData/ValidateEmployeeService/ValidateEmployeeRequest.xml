@@ -4,13 +4,13 @@
       <v1:ValidateEmployeeRequestABM>
          <tran:transactionHeader>
             <tran:consumer>
-               <tran:consumerName>POS</tran:consumerName>
+               <tran:consumerName>$CONSUMER_NAME</tran:consumerName>
                <!--Optional:-->
-               <tran:consumerTransactionID>98765</tran:consumerTransactionID>
+               <tran:consumerTransactionID>$CONSUMER_TRANSACTION_ID</tran:consumerTransactionID>
             </tran:consumer>
          </tran:transactionHeader>
          <v1:ValidateEmployeeRequest>
-            <v11:ODEmployeeID>${#Project#ValidEmpID}</v11:ODEmployeeID>
+            <v11:ODEmployeeID>$EMPLOYEE_ID</v11:ODEmployeeID>
             <!--Optional:-->
          </v1:ValidateEmployeeRequest>
       </v1:ValidateEmployeeRequestABM>

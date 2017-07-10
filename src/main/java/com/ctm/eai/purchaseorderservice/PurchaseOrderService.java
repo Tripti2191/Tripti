@@ -2,9 +2,9 @@ package com.ctm.eai.purchaseorderservice;
 
 public interface PurchaseOrderService {
 
-	public static final String NODE_CONSUMER_NAME = "Envelope.Body.createPurchaseOrderRequest.transactionHeader.consumer.consumerName";
-	public static final String NODE_CONSUMER_TXN_ID = "Envelope.Body.createPurchaseOrderRequest.transactionHeader.consumer.consumerTransactionID";
-	public static final String NODE_REQUEST_ID = "Envelope.Body.createPurchaseOrderRequest.senderRequestID.requestID";
+	public static final String NODE_CONSUMER_NAME =   "Envelope.Body.createPurchaseOrderResponse.transactionHeader.consumer.consumerName";
+	public static final String NODE_CONSUMER_TXN_ID = "Envelope.Body.createPurchaseOrderResponse.transactionHeader.consumer.consumerTransactionID";
+	public static final String NODE_REQUEST_ID = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.senderRequestID.requestID";
 	public static final String NODE_STATUS_CODE = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusCode";
 	public static final String NODE_STATUS_DESCRIPTION = "Envelope.Body.createPurchaseOrderResponse.purchaseOrderResponse.requestStatus.statusDescription";
 	
