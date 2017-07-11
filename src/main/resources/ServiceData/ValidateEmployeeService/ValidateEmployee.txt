@@ -1,2 +1,3 @@
-scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOperation|sensitiveData|result|firstName|lastName|expectedResult
-validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|PASS
+scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOperation|sensitiveData|result|firstName|lastName|receivedTime|correlationId|expectedResult
+validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|2017-07-10T22:34:21.722-04:00|3d851a62-0f46-431f-a7f5-93e4e926ad4a|PASS
+invalidId|POS|98765|0|Employee|GetEmployee|true|true|Anna|Frye-Ray|2017-07-10T22:34:21.722-04:00|3d851a62-0f46-431f-a7f5-93e4e926ad4a|Fail
