@@ -31,7 +31,6 @@ import io.restassured.response.Response;
  */
 @Listeners({ com.ctm.report.CustomReport.class })
 public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary implements ValidateEmployeeService {	
-	Response response = null;
 	
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/ValidateEmployeeService/ValidateEmployee.txt")
@@ -39,11 +38,14 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			String firstName, String lastName , String expectedResult) throws IOException {
     consoleReport.logTestMessage("Starting test scenario: " + sceanrioName);
 
-		//Instantiation Part 
+		
+       //Instantiation Part 
+	    Response response = null;
 		ServicePropertiesContainer propertiesContainer = new ServicePropertiesContainer();
 		ServicesHandler xmlServiceHandler = new ServicesHandler();
 		XmlServiceVerificationLibraries xmlServiceVerificationLibraries = new XmlServiceVerificationLibraries();
-		XmlServiceLibraries xmlServiceLibrary = new XmlServiceLibraries();
+		XmlServiceLibraries xmlServiceLibrary = new XmlServiceLibraries();	
+	
 
 		//Set properties required to post the payload and get response (setting 4 properties are mandatory. setUserName, setPassword, setIsSoap, setBodyOrEnvelope)
 		propertiesContainer.setUserName(getData("testData.serviceUserName"));
@@ -61,6 +63,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 	    response.prettyPrint();
 		
 		
+		
 		//Validation part
 		if (expectedResult.equalsIgnoreCase("PASS")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 200);
@@ -75,7 +78,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			String time = serviceLibrary.getAttributeValue(response, NODE_TIME_RECEIVED);
 			validateTime(time);
 			String actualCorrelationId = serviceLibrary.getAttributeValue(response, NODE_CORELATION_ID);
-	        xmlServiceVerificationLibraries.verifyIntegerEquals(new Integer(actualCorrelationId.length()),CORRELATIONID_LENGTH);
+			validateCorrelationId(actualCorrelationId);
 			}
 		
 		//failsceanrio
@@ -90,7 +93,6 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		
 		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("empIDNull")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
-
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_FAULT_STRING,EMPIDNULL_REASON_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_ERROR_CODE,EMPIDNULL_ERROR_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_NULLEMPID_REASON,EMPIDNULL_ERROR_MESSAGE);
@@ -98,7 +100,6 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 				
 		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("bigId")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
-
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_FAULT_STRING,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_ERROR_CODE,BIGID_ERROR_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_BIGID_ERROR_MESSAGE,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
