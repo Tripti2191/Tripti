@@ -1,3 +1,6 @@
-scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOperation|sensitiveData|result|firstName|lastName|receivedTime|correlationId|expectedResult
-validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|2017-07-10T22:34:21.722-04:00|3d851a62-0f46-431f-a7f5-93e4e926ad4a|PASS
-invalidId|POS|98765|0|Employee|GetEmployee|true|true|Anna|Frye-Ray|2017-07-10T22:34:21.722-04:00|3d851a62-0f46-431f-a7f5-93e4e926ad4a|Fail
+scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOperation|sensitiveData|result|firstName|lastName|expectedResult
+validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|PASS
+invalidId|POS|98765|0|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
+negID|POS|98765|-1|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
+empIDNull|POS|98765||Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
+bigId|POS|98765|41562373948595|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail

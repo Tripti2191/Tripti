@@ -7,13 +7,12 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.ctm.services.annotation.ServiceDataFile;
+import com.ctm.services.common.ServiceAttributesContainer;
+import com.ctm.services.common.ServicePropertiesContainer;
+import com.ctm.services.common.ServicesHandler;
 import com.ctm.services.dataproviders.ServicesDataProvider;
-import com.ctm.services.xml.ServicesHandler;
 import com.ctm.services.xml.XmlServiceLibraries;
-import com.ctm.services.xml.ServiceAttributesContainer;
-import com.ctm.services.xml.ServicePropertiesContainer;
 import com.ctm.services.xml.XmlServiceVerificationLibraries;
-
 import io.restassured.response.Response;
 
 /**
@@ -48,9 +47,6 @@ public class CreatePurchaseOrderTest extends BasePurchaseOrderTestLibrary implem
 		String templateReplacedBody = xmlServiceLibrary.replaceTemplateWithValues(body,
 				createContextForReplacement(consumerName, consumerTransactionID, requestID, orderDate, orderType,
 						vendorID, totalLines, totalQuantities));
-System.out.println("after templAte replaced body");
-		
-		System.out.println("req body..." +body);
 		propertiesContainer.setBodyOrEnvelope(templateReplacedBody);
 
 		//Build service container and get response

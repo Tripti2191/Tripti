@@ -7,12 +7,12 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.ctm.services.annotation.ServiceDataFile;
+import com.ctm.services.common.ServiceAttributesContainer;
+import com.ctm.services.common.ServicePropertiesContainer;
+import com.ctm.services.common.ServicesHandler;
 import com.ctm.services.dataproviders.ServicesDataProvider;
-import com.ctm.services.xml.ServicesHandler;
 import com.ctm.services.CtmServiceLibraries;
 import com.ctm.services.xml.XmlServiceLibraries;
-import com.ctm.services.xml.ServiceAttributesContainer;
-import com.ctm.services.xml.ServicePropertiesContainer;
 import com.ctm.services.xml.XmlServiceVerificationLibraries;
 
 import io.restassured.response.Response;

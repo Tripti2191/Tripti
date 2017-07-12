@@ -21,11 +21,21 @@ public interface ValidateEmployeeService {
 	public static final String NODE_ERROR_CODE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorCode";
 	public static final String NODE_ERROR_MESSAGE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorMessage";
 	
+	public static final String NODE_NULLEMPID_FAULT_STRING = "Envelope.Body.Fault.faultstring";
+	public static final String NODE_NULLEMPID_REASON = "Envelope.Body.Fault.detail.fault.reason";
+	public static final String NODE_NULLEMPID_ERROR_CODE= "Envelope.Body.Fault.detail.fault.errorCode";
 	
-	public static final String REASON_CODE = "Employee ID not found at PeopleSoft  for Employee ID: 0";
+	public static final String NODE_BIGID_FAULT_STRING = "Envelope.Body.Fault.faultstring";
+	public static final String NODE_BIGID_ERROR_CODE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorCode";
+	public static final String NODE_BIGID_ERROR_MESSAGE = "Envelope.Body.Fault.detail.ValidateEmployeeFaultMessage.ErrorMessage";
+	
+	public static final String EMPIDNULL_REASON_CODE = "BEA-382513: OSB Replace action failed updating variable \"body\": Error parsing XML: {err}FORG0005: Expected exactly one item, got 0 items";
+	public static final String EMPIDNULL_ERROR_CODE = "BEA-382513";
+	public static final String EMPIDNULL_ERROR_MESSAGE = "OSB Replace action failed updating variable \"body\": Error parsing XML: {err}FORG0005: Expected exactly one item, got 0 items";
+	
 	public static final String ERROR_CODE = "100";
-	public static final String ERROR_MESSAGE = "Employee ID not found at PeopleSoft  for Employee ID: 0";
 	public static final Integer CORRELATIONID_LENGTH =36;
+	public static final String BIGID_ERROR_CODE ="8";
 }
 
 

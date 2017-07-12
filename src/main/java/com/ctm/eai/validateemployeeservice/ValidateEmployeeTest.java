@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
 import com.ctm.services.*;
 
 import com.ctm.services.annotation.ServiceDataFile;
+import com.ctm.services.common.CommonServiceLibraries;
+import com.ctm.services.common.ServiceAttributesContainer;
+import com.ctm.services.common.ServicePropertiesContainer;
+import com.ctm.services.common.ServicesHandler;
 import com.ctm.services.dataproviders.ServicesDataProvider;
-import com.ctm.services.xml.ServicesHandler;
 import com.ctm.services.xml.XmlServiceLibraries;
-import com.ctm.services.xml.CommonServiceLibraries;
-import com.ctm.services.xml.ServiceAttributesContainer;
-import com.ctm.services.xml.ServicePropertiesContainer;
 import com.ctm.services.xml.XmlServiceVerificationLibraries;
 
 import io.restassured.response.Response;
@@ -36,7 +36,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/ValidateEmployeeService/ValidateEmployee.txt")
 	public void testValidateEmployeeRequestABM(String index,String sceanrioName,String consumerName, String consumerTransactionID,String employeeID,String serviceName, String serviceOperation, String sensitiveData, String result, 
-			String firstName, String lastName ,String receivedTime,String correlationId, String expectedResult) throws IOException {
+			String firstName, String lastName , String expectedResult) throws IOException {
     consoleReport.logTestMessage("Starting test scenario: " + sceanrioName);
 
 		//Instantiation Part 
@@ -64,10 +64,8 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		//Validation part
 		if (expectedResult.equalsIgnoreCase("PASS")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 200);
-			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_NAME,
-				consumerName);
-			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_TXN_ID,
-					consumerTransactionID);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_NAME,consumerName);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_CONSUMER_TXN_ID,consumerTransactionID);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_SERVICE_NAME,serviceName);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_SERVICE_OPERATION,serviceOperation);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_CONTAINS_SENSITIVE_DATA,sensitiveData);
@@ -77,20 +75,34 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			String time = serviceLibrary.getAttributeValue(response, NODE_TIME_RECEIVED);
 			validateTime(time);
 			String actualCorrelationId = serviceLibrary.getAttributeValue(response, NODE_CORELATION_ID);
-		    xmlServiceVerificationLibraries.verifyIntegerEquals(new Integer(actualCorrelationId.length()),CORRELATIONID_LENGTH);
+	        xmlServiceVerificationLibraries.verifyIntegerEquals(new Integer(actualCorrelationId.length()),CORRELATIONID_LENGTH);
 			}
 		
-		//failscenario
-		if (expectedResult.equalsIgnoreCase("FAIL")) {
+		//failsceanrio
+		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("invalidId")||sceanrioName.equalsIgnoreCase("negID")) {
+			
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
-			if (sceanrioName.equalsIgnoreCase("invalidId")) {
-				xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_FAULT_STRING,REASON_CODE);
-				xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_ERROR_CODE,ERROR_CODE);
-				xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_ERROR_MESSAGE,ERROR_MESSAGE);								
-				
-			} 
+			xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response, NODE_FAULT_STRING,"Employee ID not found at PeopleSoft  for Employee ID: "+employeeID);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_ERROR_CODE,ERROR_CODE);
+			xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response,  NODE_ERROR_MESSAGE,"Employee ID not found at PeopleSoft  for Employee ID: "+employeeID);
+			
 		}
 		
+		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("empIDNull")) {
+			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
+
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_FAULT_STRING,EMPIDNULL_REASON_CODE);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_ERROR_CODE,EMPIDNULL_ERROR_CODE);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_NULLEMPID_REASON,EMPIDNULL_ERROR_MESSAGE);
+		}
+				
+		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("bigId")) {
+			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
+
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_FAULT_STRING,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_ERROR_CODE,BIGID_ERROR_CODE);
+			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_BIGID_ERROR_MESSAGE,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
+		}
 	}
 	
 	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,

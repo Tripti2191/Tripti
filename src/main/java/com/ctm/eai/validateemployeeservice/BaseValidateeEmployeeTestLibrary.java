@@ -3,10 +3,11 @@ package com.ctm.eai.validateemployeeservice;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import com.ctm.core.CoreLibraries;
 import com.ctm.logger.ConsoleReport;
-import com.ctm.services.xml.CommonServiceLibraries;
+
 
 
 /**
@@ -52,7 +53,7 @@ private boolean isValidFormat(String format, String value) {
 	 * 
 	 * 
 	 */
-public void validateCorrelationId(String actualCorrelationId ){
+/*public void validateCorrelationId(String actualCorrelationId ){
 	
 	String splitValues[] = actualCorrelationId.split("-");
 	if(splitValues[0].length()==8 && splitValues[1].length()==4 && splitValues[2].length()==4 && splitValues[3].length()==4 &&splitValues[4].length()==12 )
@@ -67,7 +68,20 @@ public void validateCorrelationId(String actualCorrelationId ){
 
 	
 	
-}
+}*/
+
+	public boolean validateCorrelationId(String actualCorrelationId) {
+		boolean validId = false;
+		try {
+		 UUID uuid = UUID.fromString("a3472721-00f9-4891-9dbb-bb143e501f16");
+			//UUID id = UUID.fromString(actualCorrelationId);
+			validId = true;
+		} catch (Exception e) {
+			System.out.println("This is not a valid UUID");
+			validId = false;
+		}
+		return validId;
+	}
 
 
 }
