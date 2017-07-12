@@ -76,7 +76,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_FIRST_NAME,firstName);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_LAST_NAME,lastName);
 			String time = serviceLibrary.getAttributeValue(response, NODE_TIME_RECEIVED);
-			validateTime(time);
+			validateTimeFormat(time);
 			String actualCorrelationId = serviceLibrary.getAttributeValue(response, NODE_CORELATION_ID);
 			validateCorrelationId(actualCorrelationId);
 			}

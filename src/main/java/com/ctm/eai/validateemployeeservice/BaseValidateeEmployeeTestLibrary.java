@@ -26,7 +26,7 @@ public class BaseValidateeEmployeeTestLibrary extends CoreLibraries {
 	 * 
 	 */
 
-public void validateTime(String time){
+public void validateTimeFormat(String time){
 	boolean timeFormat = isValidFormat("yyyy-MM-dd HH:mm:ss.SSSSSS-HH:mm",time.replace("T", " " ));
 	if(timeFormat)
 
