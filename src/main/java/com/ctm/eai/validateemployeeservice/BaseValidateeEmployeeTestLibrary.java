@@ -23,24 +23,21 @@ public class BaseValidateeEmployeeTestLibrary extends CoreLibraries {
 	/**
 	 * To validate time format
 	 * 
-	 * 
 	 */
 
-public void validateTimeFormat(String time){
-	boolean timeFormat = isValidFormat("yyyy-MM-dd HH:mm:ss.SSSSSS-HH:mm",time.replace("T", " " ));
-	if(timeFormat)
+	public void validateTimeFormat(String time){
+		boolean timeFormat = isValidFormat("yyyy-MM-dd HH:mm:ss.SSSSSS-HH:mm",time.replace("T", " " ));
+		if(timeFormat)
+			consoleReport.logReportWithStatusAndContinue(true, "Attribute: " + time + "  value  matches with the expected format" );
+		else
+			consoleReport.logReportWithStatusAndContinue(false, "Attribute: " + time + "  value does not  matches with the expected format" );
+	}
 
-		consoleReport.logReportWithStatus(true, "Attribute: " + time + "  value  matches with the expected format" );
-	else
-		consoleReport.logReportWithStatus(false, "Attribute: " + time + "  value does not  matches with the expected format" );
-}
-
-private boolean isValidFormat(String format, String value) {
-		Date date = null;
+	private boolean isValidFormat(String format, String value) {
 		boolean isValidDateFormat = true;
 		try {
 			 SimpleDateFormat sdf = new SimpleDateFormat(format);
-			 date = sdf.parse(value);
+			 sdf.parse(value);
 		} catch (ParseException pe) {
 			 pe.printStackTrace();
 			 isValidDateFormat = false;
@@ -48,39 +45,13 @@ private boolean isValidFormat(String format, String value) {
 		return isValidDateFormat;
 	}
 
-	/**
-	 * To verify correlationId length
-	 * 
-	 * 
-	 */
-/*public void validateCorrelationId(String actualCorrelationId ){
-	
-	String splitValues[] = actualCorrelationId.split("-");
-	if(splitValues[0].length()==8 && splitValues[1].length()==4 && splitValues[2].length()==4 && splitValues[3].length()==4 &&splitValues[4].length()==12 )
-	{
-		consoleReport.logReportWithStatus(true, "Attribute: " + actualCorrelationId + "  value:  matches with the expected format : " );
-		
-	}
-	else
-	{
-		consoleReport.logReportWithStatus(false, "Attribute: " + actualCorrelationId + "  value:  matches with the expected format : " );
-	}
-
-	
-	
-}*/
-
-	public boolean validateCorrelationId(String actualCorrelationId) {
-		boolean validId = false;
+	public void validateCorrelationId(String actualCorrelationId) {
 		try {
-		 UUID uuid = UUID.fromString("a3472721-00f9-4891-9dbb-bb143e501f16");
-			//UUID id = UUID.fromString(actualCorrelationId);
-			validId = true;
+			UUID.fromString(actualCorrelationId);
+			consoleReport.logReportWithStatusAndContinue(true, "validateCorrelationId: " + actualCorrelationId + " matches with the expected format" );
 		} catch (Exception e) {
-			System.out.println("This is not a valid UUID");
-			validId = false;
+			consoleReport.logReportWithStatusAndContinue(false, "validateCorrelationId: " + actualCorrelationId + " do not  match with the expected format" );
 		}
-		return validId;
 	}
 
 

@@ -2,5 +2,5 @@ scenarioName|consumerName|consumerTransactionID|employeeID|serviceName|serviceOp
 validScenario|POS|98765|0010|Employee|GetEmployee|true|true|Anna|Frye-Ray|PASS
 invalidId|POS|98765|0|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
 negID|POS|98765|-1|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
-empIDNull|POS|98765||Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
+empIDEmpty|POS|98765||Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail
 bigId|POS|98765|41562373948595|Employee|GetEmployee|true|true|Anna|Frye-Ray|Fail

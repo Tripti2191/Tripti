@@ -1,16 +1,10 @@
 package com.ctm.eai.validateemployeeservice;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.velocity.VelocityContext;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.ctm.services.*;
 
 import com.ctm.services.annotation.ServiceDataFile;
 import com.ctm.services.common.CommonServiceLibraries;
@@ -34,9 +28,9 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 	
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/ValidateEmployeeService/ValidateEmployee.txt")
-	public void testValidateEmployeeRequestABM(String index,String sceanrioName,String consumerName, String consumerTransactionID,String employeeID,String serviceName, String serviceOperation, String sensitiveData, String result, 
+	public void testValidateEmployeeRequestABM(String index,String scenarioName,String consumerName, String consumerTransactionID,String employeeID,String serviceName, String serviceOperation, String sensitiveData, String result, 
 			String firstName, String lastName , String expectedResult) throws IOException {
-    consoleReport.logTestMessage("Starting test scenario: " + sceanrioName);
+    consoleReport.logTestMessage("Starting test scenario: " + scenarioName);
 
 		
        //Instantiation Part 
@@ -62,8 +56,6 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 	    CommonServiceLibraries serviceLibrary = new CommonServiceLibraries();
 	    response.prettyPrint();
 		
-		
-		
 		//Validation part
 		if (expectedResult.equalsIgnoreCase("PASS")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 200);
@@ -81,24 +73,22 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			validateCorrelationId(actualCorrelationId);
 			}
 		
-		//failsceanrio
-		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("invalidId")||sceanrioName.equalsIgnoreCase("negID")) {
-			
+		//failscenario
+		else if (scenarioName.equalsIgnoreCase("invalidId")||scenarioName.equalsIgnoreCase("negID")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
 			xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response, NODE_FAULT_STRING,"Employee ID not found at PeopleSoft  for Employee ID: "+employeeID);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_ERROR_CODE,ERROR_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response,  NODE_ERROR_MESSAGE,"Employee ID not found at PeopleSoft  for Employee ID: "+employeeID);
-			
 		}
 		
-		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("empIDNull")) {
+		else if (scenarioName.equalsIgnoreCase("empIDEmpty")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_FAULT_STRING,EMPIDNULL_REASON_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_NULLEMPID_ERROR_CODE,EMPIDNULL_ERROR_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_NULLEMPID_REASON,EMPIDNULL_ERROR_MESSAGE);
 		}
 				
-		if (expectedResult.equalsIgnoreCase("FAIL")&& sceanrioName.equalsIgnoreCase("bigId")) {
+		else{
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_FAULT_STRING,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_ERROR_CODE,BIGID_ERROR_CODE);
@@ -106,8 +96,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		}
 	}
 	
-	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,
-			String employeeID) {
+	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,String employeeID) {
 		VelocityContext context = new VelocityContext();
 		context.put("CONSUMER_NAME", consumerName);
 		context.put("CONSUMER_TRANSACTION_ID", consumerTransactionID);
