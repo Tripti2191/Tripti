@@ -1,0 +1,1 @@
+scenarioName|consumerName|consumerTransactionID|billTo|loginId|emailAddress|batchId|fileUploadTemplateType|totalNumberOfSegments|numberOfRowsInCurrentSegment|segmentId|uploadTimestamp|rowNum|action|cardNo|cardDesc|desktop|po|department|release|addressId

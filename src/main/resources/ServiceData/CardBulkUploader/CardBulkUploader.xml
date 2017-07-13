@@ -1,0 +1,38 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:car="http://eai.officedepot.com/service/CardsBulkUploader" xmlns:tran="http://www.officedepot.com/model/transaction">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <car:uploadProCardsRequest>
+         <tran:transactionHeader>
+            <tran:consumer>
+               <tran:consumerName>$CONSUMER_NAME</tran:consumerName>
+               <tran:consumerTransactionID>$CONSUMER_TRANSACTIONID</tran:consumerTransactionID>
+            </tran:consumer>
+         </tran:transactionHeader>
+         <car:headerInfo>
+            <car:billTo>$BILL_TO</car:billTo>
+            <car:loginId>$LOGIN_ID</car:loginId>
+            <car:emailAddress>$EMAIL_ADDRESS</car:emailAddress>
+            <car:batchId>$BATCH_ID</car:batchId>
+            <!--car:fileUploadTemplateType>1-Pro, 2- GHost, 3 - CC</car:fileUploadTemplateType-->
+            <car:fileUploadTemplateType>$FILE_UPLOAD_TEMPLATE_TYPE</car:fileUploadTemplateType>
+            <car:totalNumberOfSegments>$TOTAL_NUMBER_OF_SEGMENTS</car:totalNumberOfSegments>
+            <car:numberOfRowsInCurrentSegment>$NUMBER_OF_ROWS_INCURRENT_SEGMENT</car:numberOfRowsInCurrentSegment>
+            <car:segmentId>$SEGMENT_ID</car:segmentId>
+            <car:uploadTimestamp>$UPLOAD_TIMESTAMP</car:uploadTimestamp>
+         </car:headerInfo>
+         <car:cardInfo>
+            <car:cardInfoRecord>
+               <car:rowNum>$ROW_NUM</car:rowNum>
+               <car:action>$ACTION</car:action>
+               <car:cardNo>$CARDNO</car:cardNo>
+               <car:cardDesc>$CARD_DESC</car:cardDesc>
+               <car:desktop>$DESKTOP</car:desktop>
+               <car:po>$PO</car:po>
+               <car:department>$DEPARTMENT</car:department>
+               <car:release>$RELEASE</car:release>
+               <car:addressId>$ADDRESSID</car:addressId>
+            </car:cardInfoRecord>
+         </car:cardInfo>
+      </car:uploadProCardsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
