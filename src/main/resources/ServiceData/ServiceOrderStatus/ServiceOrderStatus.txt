@@ -1,0 +1,2 @@
+scenarioName|requestNumber|orderNumber|replytoAddress|faulttoAddress|expectedResult
+validScenario|1|2|http://www.w3.org/2005/08/addressing/anonymous|http://www.w3.org/2005/08/addressing/anonymous|PASS

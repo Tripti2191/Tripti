@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://gsidev01/ServiceStatusInquiryWS.wsdl/types/">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<typ:searchServicerequestElement>
+			<typ:pSrReqRec_inout>
+				<typ:requestNumber>$REQUEST_NUMBER</typ:requestNumber>
+				<typ:orderNumber>$ORDER_NUMBER</typ:orderNumber>
+			</typ:pSrReqRec_inout>
+		</typ:searchServicerequestElement>
+	</soapenv:Body>
+</soapenv:Envelope>
