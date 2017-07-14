@@ -1,6 +1,7 @@
 package com.ctm.eai.validateemployeeservice;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.apache.velocity.VelocityContext;
 import org.testng.annotations.Listeners;
@@ -46,7 +47,9 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 		propertiesContainer.setPassword(getData("testData.servicePassword"));
 		propertiesContainer.setIsSoap(true);
 		String body = xmlServiceLibrary.getRequestBodyFromFile("ServiceData/ValidateEmployeeService/ValidateEmployeeRequest.xml");
-		String templateReplacedBody = xmlServiceLibrary.replaceTemplateWithValues(body,createContextForReplacement(consumerName,consumerTransactionID , employeeID));
+		HashMap<String,String> nameValue=new HashMap<String,String>();
+		nameValue.put("CONSUMER_NAME", consumerName); nameValue.put("CONSUMER_TRANSACTION_ID", consumerTransactionID); nameValue.put("EMPLOYEE_ID",employeeID);
+		String templateReplacedBody = xmlServiceLibrary.replaceTemplateWithValues(body,xmlServiceLibrary.getContextObject(nameValue));
         propertiesContainer.setBodyOrEnvelope(templateReplacedBody);
 		
 		//Build service container and get response 
@@ -94,14 +97,6 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response, NODE_BIGID_ERROR_CODE,BIGID_ERROR_CODE);
 			xmlServiceVerificationLibraries.verifyStringFromResponseValueIsEqual(response,  NODE_BIGID_ERROR_MESSAGE,"Input has failed validation, please check the input  for Employee ID: "+employeeID);
 		}
-	}
-	
-	private VelocityContext createContextForReplacement(String consumerName, String consumerTransactionID,String employeeID) {
-		VelocityContext context = new VelocityContext();
-		context.put("CONSUMER_NAME", consumerName);
-		context.put("CONSUMER_TRANSACTION_ID", consumerTransactionID);
-		context.put("EMPLOYEE_ID",employeeID);
-		return context;
 	}
 }
 	
