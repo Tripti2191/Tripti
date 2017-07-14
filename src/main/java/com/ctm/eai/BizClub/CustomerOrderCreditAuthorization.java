@@ -1,4 +1,4 @@
-package com.ctm.eai.BizBox;
+package com.ctm.eai.BizClub;
 
 import org.apache.velocity.VelocityContext;
 import org.testng.annotations.Listeners;
@@ -9,7 +9,6 @@ import com.ctm.services.common.CommonServiceLibraries;
 import com.ctm.services.common.ServiceAttributesContainer;
 import com.ctm.services.common.ServicePropertiesContainer;
 import com.ctm.services.common.ServicesHandler;
-import com.ctm.services.customlibraries.CustomLibrary;
 import com.ctm.services.dataproviders.ServicesDataProvider;
 
 import io.restassured.response.Response;
@@ -20,7 +19,7 @@ import io.restassured.response.Response;
  *
  */
 @Listeners({ com.ctm.report.CustomReport.class })
-public class CustomerOrderCreditAuthorization extends BizBox_Libs{
+public class CustomerOrderCreditAuthorization extends BizClub_Libs{
 	
 	@Test(dataProviderClass = ServicesDataProvider.class, dataProvider = "Service_DataFeed_Provider")
 	@ServiceDataFile("ServiceData/BizBox/CustomerOrderCreditAuthorization.txt")
@@ -30,13 +29,11 @@ public class CustomerOrderCreditAuthorization extends BizBox_Libs{
 		ServicesHandler objServiceHandler = new ServicesHandler();
 		CommonServiceLibraries objCommonServiceLibraries = new CommonServiceLibraries();
 		
-		//Set properties required to post the payload and get response (setting 4 properties are mandatory. setUserName, setPassword, setIsSoap, setBodyOrEnvelope)
+		//Set properties required to post the payload and get response
 		propertiesContainer.setIsRest(true);
 		propertiesContainer.setIsGetOrPost("Post");
 		String body = objCommonServiceLibraries.getRequestBodyFromFile("ServiceData/BizBox/CustomerOrderCreditAuthorization.json");
 		String templateReplacedBody = objCommonServiceLibraries.replaceTemplateWithValues(body,createContextForReplacement(schoolID));
-		
-		System.out.println("req to be sent" +templateReplacedBody);
 		propertiesContainer.setBodyOrEnvelope(templateReplacedBody);
 		
 		//Build service container and get response
@@ -44,6 +41,7 @@ public class CustomerOrderCreditAuthorization extends BizBox_Libs{
 		ServiceAttributesContainer container = objServiceHandler.getServiceAttributesContainer();
 		Response response = container.getResponse();
 		response.prettyPrint();
+		
 		
 	}
 	
