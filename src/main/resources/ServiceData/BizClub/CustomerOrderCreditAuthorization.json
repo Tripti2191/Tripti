@@ -19,12 +19,12 @@
                "billingAddress":{  
                   "name":$name,
                   "address":{  
-                     "address1":$address1,
-                     "address2":$address2,
-                     "city":$city,
-                     "state":$state,
-                     "postalCode":$postalCode,
-                     "country":$country
+                     "address1":$bill_address1,
+                     "address2":$bill_address2,
+                     "city":$bill_city,
+                     "state":$bill_state,
+                     "postalCode":$bill_postalCode,
+                     "country":$bill_country
                   }
                }
             }
@@ -38,18 +38,18 @@
          "originalOrderNumber":$originalOrderNumber,
          "orderDate":$orderDate,
          "accounting":{  
-            "costCenter":$costCenter,
-            "costCenterDesc":$costCenterDesc,
+            "costCenter":$acc_costCenter,
+            "costCenterDesc":$acc_costCenterDesc,
             "poNumber":$poNumber,
-            "release":$release,
+            "release":$acc_release,
             "serialNumber":$serialNumber
          },
          "orderDetail":{  
             "totals":{  
                "subTotal":$subTotal,
-               "tax":$tax,
+               "tax":$totals_tax,
                "delivery":$delivery,
-               "discount":$discount,
+               "discount":$totals_discount,
                "misc":$misc,
                "total":$total
             },
@@ -62,17 +62,17 @@
                "customProductCode":$customProductCode,
                "quantity":$quantity,
                "unitPrice":$unitPrice,
-               "tax":$tax,
-               "discount":$discount,
+               "tax":$item_tax,
+               "discount":$item_discount,
                "cost":$cost,
                "unitOfMeasure":$unitOfMeasure,
                "description":$description,
                "comments":$comments,
-               "costCenter":$costCenter,
-               "costCenterDesc":$costCenterDesc,
+               "costCenter":$item_costCenter,
+               "costCenterDesc":$item_costCenterDesc,
                "costCenterSeq":$costCenterSeq,
                "costCenterRoute":$costCenterRoute,
-               "release":$release,
+               "release":$item_release,
                "configID":$configID,
                "bundleID":$bundleID,
                "shipTo":{  
@@ -83,13 +83,13 @@
                      "@seq":$seq,
                      "Name":$Name,
                      "shippingAddress":{  
-                        "address1":$address1,
-                        "address2":$address2,
+                        "address1":$ship_address1,
+                        "address2":$ship_address2,
                         "address3":$address3,
-                        "city":$city,
-                        "state":$state,
-                        "postalCode":$postalCode,
-                        "country":$country
+                        "city":$ship_city,
+                        "state":$ship_state,
+                        "postalCode":$ship_postalCode,
+                        "country":$ship_country
                      },
                      "contact":{  
                         "email":$email,
