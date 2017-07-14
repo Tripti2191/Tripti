@@ -76,7 +76,7 @@ public class ValidateEmployeeTest extends  BaseValidateeEmployeeTestLibrary impl
 			validateCorrelationId(actualCorrelationId);
 			}
 		
-		//failscenario
+		//fail scenario
 		else if (scenarioName.equalsIgnoreCase("invalidId")||scenarioName.equalsIgnoreCase("negID")) {
 			xmlServiceVerificationLibraries.verifyStatusCode(response, 500);
 			xmlServiceVerificationLibraries.verifyStringFromResponseContainsValue(response, NODE_FAULT_STRING,"Employee ID not found at PeopleSoft  for Employee ID: "+employeeID);
