@@ -9,7 +9,6 @@ import com.ctm.core.CoreLibraries;
 import com.ctm.logger.ConsoleReport;
 
 
-
 /**
  * Base library for application or service specific methods
  * 
