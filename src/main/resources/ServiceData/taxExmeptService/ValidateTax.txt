@@ -1,0 +1,6 @@
+scenarioName|consumerName|consumerTransactionID|taxExemptID|stateOfRequest|result
+validScenario|POS|98765|0010|fl|Pass
+invalidScenario|POS|abc|abc|fl|Fail
+negID|POS|xyzz|0010|fl|Fail
+validScenario|Abc|98765|0010|fl|Pass
+integerName|1234|xyzz|0010|fl|Fail

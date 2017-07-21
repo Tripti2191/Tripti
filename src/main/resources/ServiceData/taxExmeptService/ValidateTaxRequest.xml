@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tax="http://www.officedepot.com/model/taxExempt" xmlns:tran="http://www.officedepot.com/model/transaction">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tax:ValidationRequest>
+         <tran:transactionHeader>
+            <tran:consumer>
+               <tran:consumerName>$CONSUMER_NAME</tran:consumerName>
+                <tran:consumerTransactionID>$CONSUMER_TRANSACTION_ID</tran:consumerTransactionID>
+            </tran:consumer>
+         </tran:transactionHeader>
+         <tax:taxExemptID>$NODE_Tax_Exempt_ID</tax:taxExemptID>
+         <tax:stateOfRequest>$NODE_State_Of_Request</tax:stateOfRequest>
+      </tax:ValidationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
