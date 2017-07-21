@@ -38,9 +38,7 @@ public class CardBulkUploader extends BaseCardBulkUploaderTestLibrary implements
 			String serverName, String statusCode, String statusDescription, String expectedResult) throws IOException {
 
 		consoleReport.logTestMessage("Starting test scenario: " + sceanrioName);
-
 		// Instantiation Part
-
 		ServicePropertiesContainer propertiesContainer = new ServicePropertiesContainer();
 		ServicesHandler xmlServiceHandler = new ServicesHandler();
 		XmlServiceVerificationLibraries xmlServiceVerificationLibraries = new XmlServiceVerificationLibraries();
